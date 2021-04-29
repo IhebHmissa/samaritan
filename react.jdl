@@ -1,13 +1,11 @@
-
-
 application {
   
   config {
-    baseName samaritan,
     applicationType monolith,
+    baseName samaritan,
     packageName com.samaritan.app,
-    serviceDiscoveryType eureka,
     authenticationType jwt,
+    serviceDiscoveryType eureka, 
     databaseType mongodb,
     prodDatabaseType mongodb,
     devDatabaseType mongodb,
@@ -15,7 +13,9 @@ application {
     enableHibernateCache false,
     buildTool maven,
     serverPort 8082,
-    skipUserManagement true
+    skipUserManagement true,
+    nativeLanguage en,
+    languages [en, es]
   }
   entities Request, ReclRep, Notification,HistoryLine
 }
