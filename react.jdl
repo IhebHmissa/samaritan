@@ -1,0 +1,72 @@
+
+
+application {
+  
+  config {
+    baseName samaritan,
+    applicationType monolith,
+    packageName com.samaritan.app,
+    serviceDiscoveryType eureka,
+    authenticationType jwt,
+    databaseType mongodb,
+    prodDatabaseType mongodb,
+    devDatabaseType mongodb,
+    cacheProvider no,
+    enableHibernateCache false,
+    buildTool maven,
+    serverPort 8082,
+    skipUserManagement true
+  }
+  entities Request, ReclRep, Notification,HistoryLine
+}
+ 
+// JDL definition for application 'TwentyOnePoints' generated with command 'jhipster export-jdl'
+ 
+entity ReclRep {
+
+  natureDeReclamation String required,
+  timestamp ZonedDateTime required,
+  recRep String required,
+  reclamationDeID String,
+  note String required 
+}
+
+
+entity Request {
+
+  timestamp ZonedDateTime required,
+  lieuDeLaDemande String required,
+  natureDeLaide String required,
+  timewindow Double required,
+  degreDugence Boolean required
+
+}
+
+entity Notification {
+
+  timestamp ZonedDateTime required,
+  lieu String required,
+  timewindow2 Double required,
+  
+  
+}
+
+entity HistoryLine{
+timestamp ZonedDateTime required,
+agentID String required,
+typeofhelp String required,
+
+}
+
+relationship OneToOne {
+  Request{user(login)} to HistoryLine
+}
+relationship ManyToOne {
+  ReclRep{user(login)} to User,
+  Notification{user(login)} to User,
+  Request{user(login)} to User
+  HistoryLine{user(login)} to User
+}
+ 
+paginate Reclamation, Notification with infinite-scroll
+paginate HistoryLine with pagination
